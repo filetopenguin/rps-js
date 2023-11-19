@@ -21,7 +21,7 @@ function getPlayerChoice(){
 function playRound(player,computer){
     player.toLowerCase;
     computer.toLowerCase;
-
+    console.log("pc chose " + computer)
     if(player=="rock" && computer == "scissors"){
         return "player won"
     }
@@ -40,4 +40,11 @@ function playRound(player,computer){
     if(player=="rock" && computer == "paper"){
         return "pc won"
     }
+    if(player==computer){
+        return "tie"
+    }
 }
+
+const player = getPlayerChoice();
+const pc = getComputerChoice();
+console.log(playRound(player,pc));
