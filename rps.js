@@ -17,34 +17,69 @@ function getComputerChoice(){
 function getPlayerChoice(){
     return prompt("enter a move");
 }
+let playerScore =0;
+let pcScore=0;
 
 function playRound(player,computer){
     player.toLowerCase;
     computer.toLowerCase;
     console.log("pc chose " + computer)
-    if(player=="rock" && computer == "scissors"){
+   if(playerScore > 4 || pcScore>4){
+    if(playerScore>pcScore){
+        const winner = "player";
+    }
+    else{winner = "pc"}
+    playerScore =0;
+    pcScore=0;
+    msg.textContent="game over " +winner + " won";
+   }
+    if(player=="rock" && computer == "scissors" ||
+    player == "scissors" && computer=="paper" ||
+    player=="paper" && computer =="rock"){
+        playerScore++;
+        results.innerHTML =   "Currently: " + pcScore + " " + playerScore;
+
         return "player won"
     }
-    if(player=="scissors" && computer=="rock"){
+  
+    if(player=="scissors" && computer=="rock" ||
+    player=="paper" && computer =="scissors"||
+    player=="rock" && computer == "paper"){
+        pcScore++;
+        results.innerHTML =   "Currently: " + pcScore + " " + playerScore;
+
         return "pc won"
     }
-    if(player=="paper" && computer =="scissors"){
-        return "pc won"
-    }
-    if(player == "scissors" && computer=="paper"){
-        return "player won"
-    }
-    if(player=="paper" && computer =="rock"){
-        return "player won"
-    }
-    if(player=="rock" && computer == "paper"){
-        return "pc won"
-    }
+   
     if(player==computer){
         return "tie"
     }
+
 }
 
-const player = getPlayerChoice();
-const pc = getComputerChoice();
-console.log(playRound(player,pc));
+
+
+
+const rock = document.querySelector("#rock");
+rock.addEventListener=('click',function(){
+    score.textContent=(playRound("rock",getComputerChoice()));
+});
+
+const paper = document.querySelector("#paper");
+paper.addEventListener('click',function(){
+    score.textContent=(playRound("paper",getComputerChoice()));
+});
+
+const scissors= document.querySelector("#scissors");
+scissors.addEventListener('click',function(){
+    score.textContent= (playRound("scissors",getComputerChoice()));
+});
+
+const results = document.querySelector('#results');
+
+const msg = document.querySelector('#msg');
+
+const score = document.createElement('p');
+score.classList.add('score');
+msg.appendChild(score);
+
